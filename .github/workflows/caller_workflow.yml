@@ -4,5 +4,5 @@ on:
   push:
 jobs:
   called_workflow:
-    uses: fadyyousef/popular-repos-web-app/.github/workflows/build_example.yml@v1
+    uses: fadyyousef/popular-repos-web-app/.github/workflows/build_example.yml
  
