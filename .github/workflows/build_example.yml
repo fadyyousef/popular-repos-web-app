@@ -1,9 +1,13 @@
 name: Build Site
 on:
-  workflow_dispatch:
-  push:
-workflow_call:
-
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
 
 jobs:
   build:
