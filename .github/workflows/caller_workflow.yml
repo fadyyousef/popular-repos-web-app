@@ -1,15 +1,31 @@
-name: caller_workflow
+name: Build Site
 on:
- workflow_call:
-  inputs:
-      ring:
-        description: 'Identifier for the target deployment ring'
-        default: 'ring-0'
-        required: false
-        type: string
-      environment:
-        required: false
-        type: string
-    secrets:
-      token:
-      required: false
+  workflow_dispatch:
+  push:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: workflow_example_file
+    - uses: fadyyousef/popular-repos-web-app/.github/workflows/build_exaple.yml
+    
+    - uses: actions/checkout@v2
+    - name: Setup node 12
+      uses: actions/setup-node@v2-beta
+      with:
+        node-version: '12.x'
+
+    - name: Cache node modules
+      id: cache-node
+      uses: actions/cache@v2
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Install dependencies
+      if: steps.cache-node.outputs.cache-hit != 'true'
+      run: |
+        npm install --silent
+    - name: Build site
+      run:  npm run build
