@@ -3,11 +3,12 @@ on:
   workflow_dispatch:
   push:
 jobs:
+  called_workflow:
+    uses: fadyyousef/popular-repos-web-app/.github/workflows/build_exaple.yml@v1
   build:
     runs-on: ubuntu-latest
     steps:
     - name: workflow_example_file
-    - uses: fadyyousef/popular-repos-web-app/.github/workflows/build_exaple.yml@v1
     
     - uses: actions/checkout@v2
     - name: Setup node 12
