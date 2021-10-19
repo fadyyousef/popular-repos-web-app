@@ -1,2 +1,3 @@
 name: caller_workflow
 on:
+ workflow_call:
